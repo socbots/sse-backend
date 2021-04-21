@@ -1,4 +1,6 @@
 # API for making Sanbot move
+![Sanbot running](docs/dlg_loading2.png)
+
 *Make Alf do your biddings without touching Java code.*
 
 ### How dis work?
@@ -8,6 +10,8 @@ It listens for a POST request to **/move**, which then sends off the JSON data t
 => this event gets parsed and sends move commands to **Sanbot**.
 
 ## Usage
+**NOTE:** direction and distance aren't supported yet
+
 POST to /move accepts the following JSON properties:
 
 ```
@@ -48,6 +52,7 @@ content-type: application/json
 }
 ```
 Waving requires just the gesture and which bodypart.
+
 Alf can wave any part of his body! Even the feet! Try it out :)
 
 

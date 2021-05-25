@@ -26,8 +26,14 @@ class MessageAnnouncer:
                 del self.listeners[i]
 
 
+config = {
+    "DEBUG": True          # some Flask specific configs
+}
+
 app = flask.Flask(__name__)
 CORS(app)
+# Add conf file to app
+app.config.from_mapping(config)
 announcer = MessageAnnouncer()
 
 
@@ -53,7 +59,7 @@ def move():
     announcer.announce(msg=msg)
     return jsonify(data), 200
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def spam():
     return "Yaaas"
 
@@ -69,5 +75,7 @@ def stream():
 
 
 if __name__ == "__main__":
+    from waitress import serve
     app.run(host="0.0.0.0")  # 0.0.0.0 = listens on all addresses
-
+    pp = int(os.environ.get("PORT", 5000))
+    serve(app, host="0.0.0.0", port=pp)

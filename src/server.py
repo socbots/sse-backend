@@ -53,7 +53,7 @@ def move():
     announcer.announce(msg=msg)
     return jsonify(data), 200
 
-@app.route("/move", methods=["GET"])
+@app.route("/", methods=["GET"])
 def spam():
     return "Yaaas"
 

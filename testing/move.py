@@ -15,7 +15,7 @@ while True:
      """
 
     res = requests.post(
-        "http://localhost:5000/move", json={
+        "http://alfsse.herokuapp.com/move", json={
             "direction": "up", 
             "bodyPart": "head",
             "distance": 3

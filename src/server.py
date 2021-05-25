@@ -33,7 +33,7 @@ config = {
 app = flask.Flask(__name__)
 CORS(app)
 # Add conf file to app
-app.config.from_mapping(config)
+#app.config.from_mapping(config)
 announcer = MessageAnnouncer()
 
 
@@ -61,7 +61,7 @@ def move():
 
 @app.route("/")
 def spam():
-    return "Yaaas"
+    return "Yaaas", 200
 
 @app.route("/stream")
 def stream():

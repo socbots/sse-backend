@@ -72,7 +72,7 @@ def stream():
             msg = messages.get()
             yield msg
 
-    return flask.Response(eventStream(), mimetype="text/event-stream")
+    return app.response_class(eventStream(), mimetype="text/event-stream")
 
 
 if __name__ == "__main__":

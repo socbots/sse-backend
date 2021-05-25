@@ -65,7 +65,7 @@ def spam():
     return "Yaaas", 200
 
 @app.route("/stream")
-async def stream():
+def stream():
     def eventStream():
         messages = announcer.listen()
         while True:

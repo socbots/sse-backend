@@ -1,1 +1,1 @@
-web: gunicorn src.server:app -k gevent
+web: gunicorn src.server:app -k gevent --timeout 300

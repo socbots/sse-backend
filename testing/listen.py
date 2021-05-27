@@ -1,6 +1,6 @@
 import sseclient
 
-messages = sseclient.SSEClient('http://localhost:5000/stream')
+messages = sseclient.SSEClient('https://alfsse.herokuapp.com/stream')
 
 for msg in messages:
     print(msg)

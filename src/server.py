@@ -61,8 +61,8 @@ def move():
     return jsonify(data), 200
 
 @app.route("/")
-def spam():
-    return "Yaaas", 200
+def hello_there():
+    return "<html><body><img src='https://pbs.twimg.com/media/EDZAWNmXUAA36qR.jpg' /></body></html>", 200
 
 @app.route("/stream")
 def stream():

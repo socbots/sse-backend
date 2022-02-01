@@ -23,18 +23,20 @@ class MessageAnnouncer:
         for i in reversed(range(len(self.listeners))):
             try:
                 self.listeners[i].put_nowait(msg)
+                print("Announced msg:", msg)
             except queue.Full:
+                print("Queue full, deleting listener number", self.listeners[i])
                 del self.listeners[i]
+            except Exception as e:
+                print("Encountered unknown exception:", e)
 
 
-config = {
-    "DEBUG": True          # some Flask specific configs
-}
+config = {"DEBUG": True}  # some Flask specific configs
 
 app = flask.Flask(__name__)
 CORS(app)
 # Add conf file to app
-#app.config.from_mapping(config)
+# app.config.from_mapping(config)
 announcer = MessageAnnouncer()
 
 
@@ -49,7 +51,7 @@ def format_sse(data, event=None):
 def ping():
     msg = format_sse(data="pong")
     announcer.announce(msg=msg)
-    return {}, 200
+    return "PONG", 200
 
 
 # Listens to POSTs to /move and announces the json data
@@ -60,9 +62,14 @@ def move():
     announcer.announce(msg=msg)
     return jsonify(data), 200
 
+
 @app.route("/")
 def hello_there():
-    return "<html><body><img src='https://pbs.twimg.com/media/EDZAWNmXUAA36qR.jpg' /></body></html>", 200
+    return (
+        "<html><body><img src='https://pbs.twimg.com/media/EDZAWNmXUAA36qR.jpg' /></body></html>",
+        200,
+    )
+
 
 @app.route("/stream")
 def stream():
@@ -76,6 +83,6 @@ def stream():
 
 
 if __name__ == "__main__":
-    from waitress import serve
     pp = int(os.environ.get("PORT", 5000))
-    serve(app, host="0.0.0.0", port=pp)
+    app.run(host="0.0.0.0", port=pp)
+    print("Listening on port", pp)

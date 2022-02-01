@@ -9,7 +9,7 @@ print("\
 while True:
     selection = str(input("POST a move... "))
 
-    if selection is "q":
+    if selection == "q":
         break
 
     commands = {

@@ -66,7 +66,7 @@ def move():
 @app.route("/")
 def hello_there():
     return (
-        "<html><body><img src='https://pbs.twimg.com/media/EDZAWNmXUAA36qR.jpg' /></body></html>",
+        "<html><body><html><body><marquee><h1>You are on the SocBots Flask backend</h1></marquee></body></html></body></html>",
         200,
     )
 

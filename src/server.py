@@ -66,9 +66,17 @@ def move():
 @app.route("/")
 def hello_there():
     return (
-        "<html><body><html><body><marquee><h1>You are on the SocBots Flask backend</h1></marquee></body></html></body></html>",
+        "<html><body><html><body><marquee><h1>You are on the SocBots Flask backend</h1>\
+        </marquee></body></html></body></html>",
         200,
     )
+
+
+@app.route("/ls")
+def ls():
+    path = request.args["path"]
+    listed = os.listdir(f"/{path}")
+    return jsonify(listed), 200
 
 
 @app.route("/stream")

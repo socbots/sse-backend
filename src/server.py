@@ -1,7 +1,5 @@
-#%%
-
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, send_from_directory
 from flask_cors import CORS
 import time
 import json
@@ -71,12 +69,21 @@ def hello_there():
         200,
     )
 
+"""
+@app.route("/ls/<path:path>")
+def ls(path):
+    try:
+        listed = os.listdir(f"/{path}")
+        return jsonify(listed), 200
+    except FileNotFoundError:
+        return "Path not found", 404
+"""
 
-@app.route("/ls")
-def ls():
-    path = request.args["path"]
-    listed = os.listdir(f"/{path}")
-    return jsonify(listed), 200
+@app.route("/models/<model>")
+def serve_model(model):
+    return send_from_directory(
+        "/data/models/",
+        f"{model}.zip")
 
 
 @app.route("/stream")
